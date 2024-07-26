@@ -25,7 +25,7 @@ namespace PasswordKeeper.Core.Service
         public Link Get(int id)
         {
             foreach (Link link in _links)
-                if (link.Id == id) return link;
+                if (link.ItemId == id) return link;
             return null;
         }
         public void Create(Link link)
@@ -38,7 +38,7 @@ namespace PasswordKeeper.Core.Service
         {
             foreach (Link link in _links)
             {
-                if (link.Id == id)
+                if (link.ItemId == id)
                 {
                     _links.Remove(link);
                     break;
@@ -51,7 +51,7 @@ namespace PasswordKeeper.Core.Service
         {
             for (int i = 0; i < _links.Count; i++)
             {
-                if (link.Id != _links[i].Id)
+                if (link.ItemId != _links[i].ItemId)
                     _links[i] = link;
             }
             _dataSource.Write(_links);

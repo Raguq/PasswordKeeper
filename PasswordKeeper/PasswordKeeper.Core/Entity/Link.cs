@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,22 @@ namespace PasswordKeeper.Core.Entity
     /// </summary>
     public class Link
     {
-        public int Id { get; set; }
+        public static int idCounter = 0;
+        public Link(string name = "", string description = "")
+        {
+            ItemId = idCounter++;
+            Name = name;
+            Description = description;
+        }
+        [JsonProperty(PropertyName = "ItemId")]
+        public int ItemId { get; set; }
         public string Name { get; set; }
-        public string Desc { get; set; }
+        public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public override string ToString()
         {
-            return Name + " " + Desc;
+            return Name + " " + Description;
         }
     }
 }

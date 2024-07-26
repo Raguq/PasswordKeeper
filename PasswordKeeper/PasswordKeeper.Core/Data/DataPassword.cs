@@ -18,14 +18,22 @@ namespace PasswordKeeper.Core.Data
         {
             if (File.Exists(path))
             {
-                string data = File.ReadAllText(path);
-                return DataSerializer.Deserialize<List<Password>>(data);
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    string data = reader.ReadToEnd();
+                    var tmp = DataSerializer.Deserialize<List<Password>>(data) ?? [];
+                    Password.idCounter = tmp.Count > 0 ? tmp.Select(x => x.ItemId).Max() + 1 : 0;
+                    return tmp;
+                }
             }
-            return null;
+            return [];
         }
         public void Write(List<Password> data)
         {
-            File.WriteAllText(path, DataSerializer.Serialize(data));
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                writer.WriteLine(DataSerializer.Serialize(data));
+            }
         }
     }
 }

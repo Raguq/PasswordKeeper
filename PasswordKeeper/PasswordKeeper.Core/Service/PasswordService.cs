@@ -25,7 +25,7 @@ namespace PasswordKeeper.Core.Service
         public Password Get(int id)
         {
             foreach (Password password in _passwords)
-                if (password.Id == id) return password;
+                if (password.ItemId == id) return password;
             return null;
         }
         public void Create(Password password)
@@ -38,7 +38,7 @@ namespace PasswordKeeper.Core.Service
         {
             foreach (Password password in _passwords)
             {
-                if (password.Id == id)
+                if (password.ItemId == id)
                 {
                     _passwords.Remove(password);
                     break;
@@ -51,7 +51,7 @@ namespace PasswordKeeper.Core.Service
         {
             for (int i = 0; i < _passwords.Count; i++)
             {
-                if (password.Id != _passwords[i].Id)
+                if (password.ItemId != _passwords[i].ItemId)
                     _passwords[i] = password;
             }
             _dataSource.Write(_passwords);

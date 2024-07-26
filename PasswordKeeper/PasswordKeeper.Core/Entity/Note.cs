@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,20 @@ namespace PasswordKeeper.Core.Entity
     /// <summary>
     /// Класс для сохранения простых записей
     /// </summary>
-    public class Note(string title, string description)
+    public class Note
     {
-        public int Id { get; set; } = 0;
-        public string Title { get; set; } = title;
+        public static int idCounter = 0;
+        public Note (string title, string description)
+        {
+            ItemId = idCounter++;
+            Title = title;
+            Description = description;
+        }
+        [JsonProperty(PropertyName = "ItemId")]
+        public int ItemId { get; set; }
+        public string Title { get; set; }
 
-        public string Description { get; set; } = description;
+        public string Description { get; set; }
 
         public override string ToString()
         {

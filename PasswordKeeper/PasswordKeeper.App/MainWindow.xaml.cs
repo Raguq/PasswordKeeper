@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using PasswordKeeper.Core.Data;
+using PasswordKeeper.Core.Service;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,22 +18,39 @@ namespace PasswordKeeper.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainViewModel viewModel = new MainViewModel();
+        private NoteViewModel noteViewModel = new NoteViewModel(new NoteService(new DataNote()));
+        private PasswordViewModel passwordViewModel = new PasswordViewModel(new PasswordService(new DataPassword()));
+        private LinkViewModel linkViewModel = new LinkViewModel(new LinkService(new DataLink()));
         public MainWindow()
         {
-            DataContext = viewModel;
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+
+        private void PasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            Output.Text = Input.Text;
+            Main.Content = new PasswordPage(passwordViewModel);
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void LinksButton_Click(object sender, RoutedEventArgs e)
         {
-            Input.Text = string.Empty;
-            Output.Text = string.Empty;
+            Main.Content = new LinkPage(linkViewModel);
+        }
+
+        private void NoteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new NotePage(noteViewModel);
+
+        }
+
+        private void Main_Navigated(object sender, NavigationEventArgs e)
+        {
+
+        }
+
+        private void PasswordButton_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
         }
     }
 }

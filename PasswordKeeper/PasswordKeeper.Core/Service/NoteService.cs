@@ -28,7 +28,7 @@ namespace PasswordKeeper.Core.Service
         public Note Get(int id)
         {
             foreach (Note note in _notes)
-                if (note.Id == id) return note;
+                if (note.ItemId == id) return note;
             return null;
         }
         public void Create(Note note)
@@ -41,7 +41,7 @@ namespace PasswordKeeper.Core.Service
         {
             foreach (Note note in _notes)
             {
-                if (note.Id == id)
+                if (note.ItemId == id)
                 {
                     _notes.Remove(note);
                     break;
@@ -54,7 +54,7 @@ namespace PasswordKeeper.Core.Service
         {
             for (int i = 0; i < _notes.Count; i++)
             {
-                if (note.Id != _notes[i].Id)
+                if (note.ItemId != _notes[i].ItemId)
                     _notes[i] = note;
             }
             _dataSource.Write(_notes);

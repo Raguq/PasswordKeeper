@@ -11,10 +11,10 @@ namespace PasswordKeeper.Core.Entity
     /// </summary>
     public class Tab
     {
-        public int Id { get; set; }
+        public int ItemId { get; set; }
         public string Name { get; set; }
         public TabType Type { get; set; }
-        public List<int> Ids { get; set; }
+        public List<int> ItemIds { get; set; }
     }
 
     public enum TabType

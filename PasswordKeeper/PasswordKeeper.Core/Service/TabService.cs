@@ -25,7 +25,7 @@ namespace PasswordKeeper.Core.Service
         public Tab Get(int id)
         {
             foreach (Tab tab in _tabs)
-                if (tab.Id == id) return tab;
+                if (tab.ItemId == id) return tab;
             return null;
         }
         public void Create(Tab tab)
@@ -38,7 +38,7 @@ namespace PasswordKeeper.Core.Service
         {
             foreach (Tab tab in _tabs)
             {
-                if (tab.Id == id)
+                if (tab.ItemId == id)
                 {
                     _tabs.Remove(tab);
                     break;
@@ -51,7 +51,7 @@ namespace PasswordKeeper.Core.Service
         {
             for (int i = 0; i < _tabs.Count; i++)
             {
-                if (tab.Id != _tabs[i].Id)
+                if (tab.ItemId != _tabs[i].ItemId)
                     _tabs[i] = tab;
             }
             _dataSource.Write(_tabs);

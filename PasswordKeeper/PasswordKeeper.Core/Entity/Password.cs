@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,16 @@ namespace PasswordKeeper.Core.Entity
     /// </summary>
     public class Password
     {
-        public int Id { get; set; }
+        public static int idCounter = 0;
+        public Password(string nameOfSmth, string login, string passwordSecure)
+        {
+            ItemId = idCounter++;
+            NameOfSmth = nameOfSmth;
+            Login = login;
+            PasswordSecure = passwordSecure;
+        }
+        [JsonProperty(PropertyName = "ItemId")]
+        public int ItemId { get; set; }
         public string NameOfSmth { get; set; }
         public string Login { get; set; }
         public string PasswordSecure { get; set; }

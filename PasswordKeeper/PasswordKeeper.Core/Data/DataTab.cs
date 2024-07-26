@@ -21,7 +21,7 @@ namespace PasswordKeeper.Core.Data
                 string data = File.ReadAllText(path);
                 return DataSerializer.Deserialize<List<Tab>>(data);
             }
-            return null;
+            return [];
         }
         public void Write(List<Tab> data)
         {
